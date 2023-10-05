@@ -1,4 +1,7 @@
+#!/usr/bin/env python3
+"""Use mypy to validate the code"""
 from typing import Tuple, List
+
 
 def zoom_array(lst: Tuple[int], factor: int = 2) -> Tuple[int]:
     zoomed_in: Tuple[int] = (
