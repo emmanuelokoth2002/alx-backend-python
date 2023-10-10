@@ -5,27 +5,18 @@ Tasks with task_wait_random
 import asyncio
 from typing import List
 
+
 task_wait_random = __import__('3-tasks').task_wait_random
 
 
 async def task_wait_n(n: int, max_delay: int) -> List[float]:
-    """
-    Create asyncio tasks that run task_wait_random n times with the specified
-    max_delay.
+    """ Returns a list of float """
+    res = await asyncio.gather(*(task_wait_random(max_delay)
+                               for i in range(n)))
+    # sort the list in ascending order
+    for i in range(len(res)):
+        for j in range(i+1, len(res)):
+            if (res[i] > res[j]):
+                res[i], res[j] = res[j], res[i]
 
-    Args:
-        n (int): The number of times to run task_wait_random.
-        max_delay (int): The maximum delay in seconds for task_wait_random.
-
-    Returns:
-        List[float]: A list of delays in ascending order.
-    """
-    delays = []
-
-    tasks = [task_wait_random(max_delay) for _ in range(n)]
-
-    results = await asyncio.gather(*tasks)
-
-    delays.extend(results)
-
-    return delay
+    return res
