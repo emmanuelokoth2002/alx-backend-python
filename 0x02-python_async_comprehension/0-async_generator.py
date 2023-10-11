@@ -10,7 +10,7 @@ from typing import AsyncGenerator
 async def async_generator() -> AsyncGenerator[float, None]:
     """
     Coroutine that yields random numbers asynchronously.
-    
+
     This coroutine loops 10 times, waiting 1 second between each yield,
     and yields a random float between 0 and 10.
 
